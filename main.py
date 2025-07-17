@@ -40,3 +40,6 @@ async def process_code(request: CodeRequest):
     prompt = f"Please {request.task} this {request.language} code:\n\n{request.code}"
     response = model.generate_content(prompt)
     return {"response": response.text}
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
