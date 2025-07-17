@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Explainer & Debugger Bot</title>
+    <link href="/static/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Code Explainer & Debugger Bot</h1>
+            <p>Powered by GenAI - Understand and debug your code instantly</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">Code Input</h2>
+                <div class="language-selector">
+                    <label for="language">Language:</label>
+                    <select id="language">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="csharp">C#</option>
+                        <option value="php">PHP</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="swift">Swift</option>
+                    </select>
+                </div>
+                <textarea id="codeInput" class="code-input" placeholder="Paste your code here..."></textarea>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="explainCode()">🔍 Explain Code</button>
+                    <button class="btn btn-secondary" onclick="debugCode()">🐛 Debug Code</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">AI Analysis</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('explanation')">Explanation</button>
+                    <button class="tab" onclick="switchTab('debug')">Debug Report</button>
+                </div>
+
+                <div id="explanation-tab" class="tab-content active">
+                    <div class="output-content" id="explanationOutput">
+                        <p>Ready to explain your code! Paste your code above and click "Explain Code".</p>
+                    </div>
+                </div>
+
+                <div id="debug-tab" class="tab-content">
+                    <div class="output-content" id="debugOutput">
+                        <p>Debug analysis will appear here. Click "Debug Code".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
