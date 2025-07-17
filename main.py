@@ -5,30 +5,32 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import google.generativeai as genai
+import os
+import uvicorn
 
 app = FastAPI()
 
 # Allow frontend to access backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Static files and templates
+# Mount static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # Request model
 class CodeRequest(BaseModel):
     code: str
-    task: str  # "explain" or "debug"
+    task: str  
     language: str
 
-# Configure GenAI
-genai.configure(api_key="AIzaSyD2LhL9IEcXiShGmlW7SNzf9quprwFex_Y")  # Replace with your Gemini API key
+# Configure Gemini API
+genai.configure(api_key="AIzaSyD2LhL9IEcXiShGmlW7SNzf9quprwFex_Y")  
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 @app.get("/", response_class=HTMLResponse)
@@ -41,5 +43,7 @@ async def process_code(request: CodeRequest):
     response = model.generate_content(prompt)
     return {"response": response.text}
 
+# Optional for local testing
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 8000))  # Use Render's dynamic port or default to 8000
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
