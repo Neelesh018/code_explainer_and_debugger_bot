@@ -30,7 +30,7 @@ class CodeRequest(BaseModel):
     language: str
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyDHKICsg0eSoeaJUYvuu-HVhaljLkyn_6I")  
+genai.configure(api_key="AIzaSyA8iDWA2jHImpRtnLO3ZQXMMQwRUQKL_D4")  
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 @app.get("/", response_class=HTMLResponse)
